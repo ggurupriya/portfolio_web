@@ -4,13 +4,6 @@ import { Brain, ShieldCheck, BarChart2, Code2 } from 'lucide-react';
 
 const C = { navy: '#080c14', surface: '#0d1525', snow: '#e2e8f0', silver: '#64748b', sky: '#38bdf8', green: '#34d399', slate: '#1e293b' } as const;
 
-const stats = [
-  { value: '9.52', label: 'CGPA' },
-  { value: '93%', label: 'ML Accuracy' },
-  { value: '94%', label: 'Sensitivity' },
-  { value: '4+', label: 'Projects' },
-];
-
 const interests = [
   { icon: Brain, label: 'Machine Learning' },
   { icon: BarChart2, label: 'Data Science' },
@@ -27,24 +20,10 @@ const bioLines = [
 
 const About = () => {
   const ref = useRef<HTMLElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [imgMousePos, setImgMousePos] = useState({ x: 0, y: 0 });
   
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const lineH = useTransform(scrollYProgress, [0.1, 0.8], ['0%', '100%']);
-  const imgScale = useTransform(scrollYProgress, [0.1, 0.5], [0.8, 1]);
-  const imgOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
-  const textY = useTransform(scrollYProgress, [0.1, 0.4], [60, 0]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    setMousePosition({
-      x: (e.clientX - rect.left - rect.width / 2) * 0.05,
-      y: (e.clientY - rect.top - rect.height / 2) * 0.05,
-    });
-  };
 
   const handleImageMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -85,8 +64,6 @@ const About = () => {
       </motion.div>
 
       <div 
-        ref={containerRef}
-        onMouseMove={handleMouseMove}
         style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: '320px 1fr', gap: 80, position: 'relative', alignItems: 'start' }}
       >
         {/* Left: Profile Image + Focus Areas */}
